@@ -1,6 +1,6 @@
 #param($p1)
 #$Script:args=""
-$FileName = "C:\IDM\Azure\Filename.csv"
+$FileName = "<File_location>\Filename.csv"
 $username = "userid@domain.com"
 
 $pass = convertto-securestring (get-content secstring.txt) -key (1..16)
