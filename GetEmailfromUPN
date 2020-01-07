@@ -1,0 +1,17 @@
+param($p1)
+$Script:args=""
+$username = "userid@domain.com"
+#$pass = cat secureString_userid.txt | convertto-securestring
+$pass = convertto-securestring (get-content password.txt) -key (1..16)
+$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $pass
+Connect-MsolService -Credential $cred
+
+foreach ($key in $PSBoundParameters.keys) {
+    $Script:args+= "`$$key=" + $PSBoundParameters["$key"] + "  "
+  	$value= $PSBoundParameters["$key"]
+   $user = Get-AzureADUser -Filter "userPrincipalName eq '$value'"
+   $email = $user.mail
+write-host $email
+  
+ }
+#write-host "MFA details of user" $Script:args "are " $userdetail
