@@ -1,3 +1,5 @@
+# userinput.csv with samaccountname, streetaddress (the value required for the user)
+
 Function Change-Street($user)
 
 {
