@@ -1,0 +1,25 @@
+Function Get-Manager($user)
+
+{
+    
+    $info=@{}
+    
+    $userDetails = Get-ADUser $user.samaccountname -properties emailaddress, manager
+    
+    $info["User"]=$userDetails.samaccountname
+  
+    IF ($userDetails.manager) # if not null
+    
+    {
+    
+    $managerDetails = Get-ADUser (Get-ADUser $user.samaccountname -properties manager).manager -properties emailaddress
+    
+    $info["Manager"]=$managerDetails.emailaddress
+    
+    }
+    
+    New-Object -TypeName PSObject -Property $info
+                            
+} 
+
+Import-Csv "C:\Temp\Users.csv" | ForEach-Object -Process { Get-Manager $_ } | Export-CSV "C:\Temp\Managerlist.csv" -noType
