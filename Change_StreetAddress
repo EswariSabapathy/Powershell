@@ -1,0 +1,28 @@
+Function Change-Street($user)
+
+{
+    
+    $info=@{}
+
+
+    Set-ADUser -Identity $user.samaccountname -streetAddress $user.streetaddress
+    
+     $userDetails = Get-ADUser $user.samaccountname -properties streetaddress,state,postalcode
+     $info["User"]=$userDetails.samaccountname
+ 
+    IF ($userDetails.streetaddress) # if not null
+    
+    {
+      $info["streetaddress"]=$userDetails.streetaddress
+    
+    }
+   
+    
+   
+
+    New-Object -TypeName PSObject -Property $info
+                            
+} 
+
+
+Import-Csv "C:\Temp\userinput.csv" | ForEach-Object -Process { Change-Street $_ } | Export-CSV "C:\Temp\StreetAddress.csv" -noType
