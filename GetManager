@@ -1,3 +1,5 @@
+# Users.csv with samaccountname and output will be Managerlist.csv with user samaccountname and email address of manager
+
 Function Get-Manager($user)
 
 {
