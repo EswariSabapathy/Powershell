@@ -1,4 +1,7 @@
 
+# disabledusers.csv with samaccountname, $targetou = disabled ou 
+# Moves list of users to Disabled OU and disables the account
+
 $targetou='ou=DisabledUsers,dc=sample,dc=com'
 $UserList = Import-Csv 'C:\Temp\disabledusers.csv'
 foreach ($User in $UserList) {
