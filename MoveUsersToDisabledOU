@@ -1,0 +1,8 @@
+
+$targetou='ou=DisabledUsers,dc=sample,dc=com'
+$UserList = Import-Csv 'C:\Temp\disabledusers.csv'
+foreach ($User in $UserList) {
+Get-ADUser -Identity $User.samaccountname | Move-ADObject -TargetPath $targetOU -PassThru
+Set-ADUser -Identity $User.samaccountname -Enabled $false
+##Move-ADObject -Identity $User.samaccountname -TargetPath $targetOU -PassThru
+}
