@@ -1,6 +1,1 @@
-Getuserdetail_bulk.ps1
-
-Input the list of users with email id and find if they are enrolled in MFA or not. 
-
-GetEmailfromUPN: 
-Input upn of the user and you will be able to retrieve Email of the user
+List of scripts to help with user management,  group management and MFA details.
